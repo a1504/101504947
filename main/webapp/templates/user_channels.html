@@ -1,0 +1,82 @@
+<div class="row-fluid">
+
+    <div class="col-lg-12">
+        <ul class="breadcrumb">
+            <li class="active"><strong>{{'VIEW_USER_PROFILE'|translate}}</strong></li>
+        </ul>
+    </div>
+
+    <div class="row-fluid" >
+        <div class="col-lg-12" >
+            <A ng-href="#/{{userName}}" class="link-size">{{userName}}</A>
+        </div>
+        <div class="div-space"></div>
+        <div class="col-lg-12" >
+            <a href="" class="btn btn-info btn-xs" >{{'USER_DETAILS'|translate}}</a>
+        </div>
+    </div>
+    
+    <div class="col-lg-12"><hr/></div>
+
+    <div class="col-lg-12" align="center" ng-hide="true">
+        <div class="col-lg-12">
+            <img src="../img/face.png" class="img-thumbnail"/>
+            <hr/>
+        </div>
+        <div class="col-lg-12" ng-hide="true">
+            <A ng-href="#/{{userName}}">{{userName}}</A>
+            <hr/>
+        </div>
+    </div>
+
+    <div class="col-lg-3" >
+        <div class="list-group">
+            <a href="" class="list-group-item" ng-click="clickPublic()"> 
+                <!--<span class="badge">+99</span>-->
+                {{'PUBLIC'|translate}}
+            </a>
+            <a href="" class="list-group-item" ng-click="clickPrivate()"> 
+                <!--<span class="badge">+99</span>-->
+                {{'PRIVATE'|translate}}
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-9" >
+        <div class="col-lg-12" ng-repeat="m in dataSet">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <A ng-href="#/{{userName}}/{{m.idCanal}}">{{m.nombre}}</A>
+                    <P>{{m.descrip}}</P>
+                    <a  ng-if="m.owner" ng-click="clickEdit($index)" class="btn btn-default btn-xs">{{'EDIT'|translate}}</a>
+                    <a  ng-if="m.owner" ng-click="clickDelete($index)" class="btn btn-danger btn-xs">{{'DELETE'|translate}}</a>
+                    <a  ng-if="!m.owner && !m.join" ng-click="clickJoin($index)" class="btn btn-success btn-xs">{{'JOIN'|translate}}</a>
+                    <a  ng-if="!m.owner && m.join" ng-click="clickUnjoin($index)" class="btn btn-danger btn-xs">{{'UNJOIN'|translate}}</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!--<div ng-repeat="m in dataSet" >
+
+    <div class="row">
+        <div class="col-md-12">
+            <p class="text-center lead">
+                <A ng-href="#/{{userName}}/{{m.idCanal}}">{{m.nombre}}</A>
+            </p>
+        </div>
+        <div class="col-md-12"> <p class="text-center lead"> {{m.descrip}}</p></div>
+    </div>
+
+    <button  ng-if="m.owner" ng-click="clickEdit($index)" class="btn btn-primary">{{'EDIT'|translate}}</button>
+    <button  ng-if="m.owner" ng-click="clickDelete($index)" class="btn btn-danger">{{'DELETE'|translate}}</button>
+
+    <button  ng-if="!m.owner && !m.join" ng-click="clickJoin($index)" class="btn btn-success">{{'JOIN'|translate}}</button>
+    <button  ng-if="!m.owner && m.join" ng-click="clickUnjoin($index)" class="btn btn-danger">{{'UNJOIN'|translate}}</button>
+
+    <hr />
+
+</div>-->

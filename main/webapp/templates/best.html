@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="row text-center">
+        <h2>Best Channels</h2>
+    </div>
+    <hr class="star-primary">        
+
+
+    </br>
+    <div ng-repeat="m in dataSet" >
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="lead">
+                    {{'POST_BY'|translate}} <A ng-href="#/{{m.lastPost.remitente}}">{{m.lastPost.remitente}}</A> On
+                    <A ng-href="#/{{m.ownerUser}}/{{m.idCanal}}">{{m.nombre}}</A> 
+                </p>
+            </div>
+
+            <div class="col-md-12" ng-show="m.lastPost.msg.length">
+                <p class="text-msg text-justify"  ng-bind-html="m.lastPost.msg"></p> 
+            </div>
+            <div class="col-md-12" ng-show="m.lastPost.blobs.length">
+                <div class="row">
+                    <div class="col-md-3" >
+                    </div>
+                    <div class="col-md-6" >
+                        <img src="{{urlImages}}{{m.lastPost.blobs[0]}}" class="img-responsive" ng-if="isImage($index)"/>
+                        <a href="{{urlFiles}}{{m.lastPost.blobs[0]}}" target="_blank" ng-if="!isImage($index)">
+                            <img  src="img/file.png" class="img-responsive" />
+                            {{m.lastPost.nameBlobs[0]}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" ng-hide="m.delete">
+                <p class="lead">
+                    <A ng-show="{{m.lastPost.blobsCount - 1 >= 1}}" ng-href="#post/{{m.ownerUser}}/{{m.idCanal}}/{{m.lastPost.idPost}}">Files {{m.lastPost.blobsCount - 1}}+</A>
+                    <A ng-click="go($index)" ng-href="#post/{{m.ownerUser}}/{{m.idCanal}}/{{m.lastPost.idPost}}">{{'VIEW_POST'|translate}}
+                    </A>
+                </p>
+            </div>
+
+            <div class="col-md-12" ng-show="m.delete">
+                <p class="lead">
+                <h4>The channel was deleted
+                </h4>
+                </p>
+                <button class="btn btn-danger" ng-click="clickUnjoin($index)">{{'UNJOIN'|translate}}</button>
+            </div>
+
+        </div>
+        <!-- 
+           <button  ng-if="m.owner" ng-click="clickUnjoin($index)" class="btn btn-danger">{{'UNJOIN'|translate}}</button> -->
+
+        <hr />
+    </div>
+
+    <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()" ng-show="dataSet.length"></pagination>
+</div>

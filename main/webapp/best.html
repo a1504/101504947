@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>Role&Join</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    </head>
+
+    <body ng-app="helloApp">
+        <div ng-controller="bestRedirectController" align="center">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Role&Join</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a HREF="{{url}}register.html">{{'REGISTER'|translate}}</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+
+            <div class="container">
+                <div class="row text-center">
+                    <h2>Best Channels</h2>
+                </div>
+                <hr class="star-primary">        
+
+
+                </br>
+                <div ng-repeat="m in dataSet" >
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="lead">
+                                {{'POST_BY'|translate}} <A ng-href="#/{{m.lastPost.remitente}}">{{m.lastPost.remitente}}</A> On
+                                <A ng-href="#/{{m.ownerUser}}/{{m.idCanal}}">{{m.nombre}}</A> 
+                            </p>
+                        </div>
+
+                        <div class="col-md-12" ng-show="m.lastPost.msg.length">
+                            <p class="text-msg text-justify"  ng-bind-html="m.lastPost.msg"></p> 
+                        </div>
+                        <div class="col-md-12" ng-show="m.lastPost.blobs.length">
+                            <div class="row">
+                                <div class="col-md-3" >
+                                </div>
+                                <div class="col-md-6" >
+                                    <img src="{{urlImages}}{{m.lastPost.blobs[0]}}" class="img-responsive" ng-if="isImage($index)"/>
+                                    <a href="{{urlFiles}}{{m.lastPost.blobs[0]}}" target="_blank" ng-if="!isImage($index)">
+                                        <img  src="img/file.png" class="img-responsive" />
+                                        {{m.lastPost.nameBlobs[0]}}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" ng-hide="m.delete">
+                            <p class="lead">
+                                <A ng-show="{{m.lastPost.blobsCount - 1 >= 1}}" ng-href="#post/{{m.ownerUser}}/{{m.idCanal}}/{{m.lastPost.idPost}}">Files {{m.lastPost.blobsCount - 1}}+</A>
+                                <A ng-click="go($index)" ng-href="#post/{{m.ownerUser}}/{{m.idCanal}}/{{m.lastPost.idPost}}">{{'VIEW_POST'|translate}}
+                                </A>
+                            </p>
+                        </div>
+
+                        <div class="col-md-12" ng-show="m.delete">
+                            <p class="lead">
+                            <h4>The channel was deleted
+                            </h4>
+                            </p>
+                            <button class="btn btn-danger" ng-click="clickUnjoin($index)">{{'UNJOIN'|translate}}</button>
+                        </div>
+
+                    </div>
+                    <!-- 
+                       <button  ng-if="m.owner" ng-click="clickUnjoin($index)" class="btn btn-danger">{{'UNJOIN'|translate}}</button> -->
+
+                    <hr />
+                </div>
+
+                <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()" ng-show="dataSet.length"></pagination>
+            </div>
+
+        </div>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/angular/angular.min.js"></script>
+        <script src="js/angular/angular-animate.min.js"></script>
+        <script src="js/angular/angular-route.min.js"></script>
+        <script src="js/angular/angular-cookies.min.js"></script>
+        <script src="js/angular/angular-resource.min.js"></script>
+        <script src="js/angular/angular-sanitize.min.js"></script>
+        <script src="js/angular/angular-file-upload.js"></script>
+        <script src="js/angular/angular-translate.min.js"></script>
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers.js"></script>
+        <script src="scripts/services.js"></script>
+        <script src="scripts/directives.js"></script>
+        <script src="scripts/filters.js"></script>
+        <script src="js/angular/modules/angular-md5.min.js"></script>
+        <script src="js/angular/modules/angular-base64.min.js"></script>
+        <script src="js/ui-bootstrap-tpls-0.11.0.min.js"></script>
+    </body>
+</html>

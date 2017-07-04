@@ -1,0 +1,115 @@
+<!--<div class="page-header" id="banner" >
+    <br/><br/>-->
+<div class="row">
+    <div class="container" ng-controller="crearCanalControl">
+
+        <div class="col-lg-12" align="center">
+            <br/>
+            <a  href="" ng-click="showElementForm(0)">
+                <span class="fa fa-slack  fa-2x" style="color: #999999"></span>
+            </a>
+            <a  href="" ng-click="showElementForm(1)">
+                <span class="fa fa-pencil-square-o  fa-2x" style="color: #999999"></span>
+            </a>
+            <!--            <a  href="" ng-click="showElementForm(2)">
+                            <span class="fa  fa-unlock-alt  fa-2x" style="color: #999999"></span>
+                        </a>-->
+            <a  href="" ng-click="showElementForm(3)">
+                <span class="fa fa-users fa-2x" style="color: #999999"></span>
+            </a>
+        </div>
+
+        <div class="row-fluid" >
+            <br/>
+            <br/>
+            <br/>
+            <!--CHANNEL NAME-->
+            <div class="row-fluid" ng-show="showElementFrm[0]" align="center">
+
+                <div class="col-lg-12">
+                    <label>{{'CHANNEL_NAME'|translate}}</label>
+                </div>
+
+                <div class="col-lg-4 col-lg-offset-4" >
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-slack  fa-lg" style="color: #DD4814"></i></span>
+                        <input type="text"  class="form-control" placeholder="{{'CHANNEL_NAME'|translate}}" required ng-model="canal.nombre">
+                    </div>
+                </div>
+                <div class="col-lg-1" align="left">
+                    <a href=""  class="btn btn-primary text-left" ng-click="onClickBtnAccess()">
+                        <span>
+                            <i ng-class="classAccess" style="color: #ffffff"></i>
+                        </span>
+                    </a>
+                </div>
+
+            </div>
+            <!--CHANNEL DESCRIPCION-->
+            <div class="row-fluid" ng-show="showElementFrm[1]" align="center">
+                <div class="col-lg-12" >
+                    <label>{{'CHANNEL_DESCRIPTION'|translate}}</label>
+                </div>
+                <div class="col-lg-4 col-lg-offset-4" >
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-pencil-square-o fa-lg" style="color: #DD4814"></i></span>
+                        <input type="text"  class="form-control" placeholder="{{'DESCRIPTION'|translate}}" ng-model="canal.descrip">
+                    </div>
+                </div>
+            </div>
+            <!--INVITATION-->
+            <div class="row-fluid" ng-show="showElementFrm[3]" align="center">
+                <div class="row-fluid">
+                    <div class="col-lg-12">
+                        <label>{{'WHO_CAN_POST'|translate}}</label>
+                    </div>
+                    <div class="col-lg-4 col-lg-offset-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa-lg" style="color: #DD4814"></i></span>
+                            <select  name="txt_tipo" ng-model="canal.whoPost" class="form-control">
+                                <option value="1">{{'JUST_ME'|translate}}</option>
+                                <option value="2">{{'INVITED'|translate}}</option>
+                                <option value="3">{{'ANYONE'|translate}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <br/>
+                    <div class="col-lg-12">
+                        <label>{{'INVITE'|translate}}</label>
+                    </div>
+                    <div class="col-lg-4 col-lg-offset-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa-lg" style="color: #DD4814"></i></span>
+                            <textarea ng-model="canal.invitados" rows="1" class="form-control" placeholder="{{'EG'|translate}}: @anyone, anyemail@anyhost.com" id="message" ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--ALERT-->
+            <div class="row-fluid">
+                <br/>
+                <div class="col-lg-4 col-lg-offset-4">
+                    <div class="form-group floating-label-form-group controls" ng-show="alertShow[0] || alertShow[1] || alertShow[2]">
+                        <alert type="success" ng-show="alertShow[0]" close="closeAlert()">{{alertMsg|msgFilter}}</alert>
+                        <alert ng-show="alertShow[1]" close="closeAlert()">{{alertMsg|msgFilter}}</alert>
+                        <alert type="danger" ng-show="alertShow[2]" close="closeAlert()">{{alertMsg|msgFilter}}</alert>            
+                    </div>
+                </div>
+            </div>
+
+            <!--BUTTON-->
+            <div class="row-fluid" ng-if="showElementFrm[0]||showElementFrm[1]||showElementFrm[3]">
+                <div class="col-lg-4 col-lg-offset-4">
+                    <div class="input-group">
+                        <button type="submit" class="btn btn-default pull-left" ng-click="clickNewCanal()"
+                                ng-disabled="newChannelForm.$invalid">{{'SEND'|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--</div>-->

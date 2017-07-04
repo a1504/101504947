@@ -1,22 +1,120 @@
-<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <title>Hello App Engine</title>
-  </head>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Role&Join</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+       <link rel="stylesheet" href="css/bootswatch.com.united/bootstrap.css" media="screen">
+        <link rel="stylesheet" href="css/bootswatch.com.united/bootstrap.min.css">
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/bootstrapcdn.com.font-awesome.4.3.0.css/font-awesome-4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/test.css">
+        <link rel="stylesheet" type="text/css" href="css/animations.css">
+        <link rel="stylesheet" href="rolejoin_icon_fonts/rolejoin_style.css">
+        <link rel="shortcut icon" href="img/role_and_join_icon.png">
 
-  <body>
-    <h1>Hello App Engine!</h1>
-  
-    <table>
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Available Servlets:</td>        
-      </tr>
-      <tr>
-        <td><a href='/hello'>The servlet</a></td>
-      </tr>
-    </table>
-  </body>
+    </head>
+
+    <body ng-app="helloApp">
+        <div ng-controller="iniControl">
+            <div class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+
+                        <a href="#inicio" class="navbar-brand" style="text-align: center"><i class="fa icon-role_and_join_icon fa-lg"></i> Role And Join </a>
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                    </div>
+
+                    <div class="navbar-collapse collapse" id="navbar-main">
+                        <ul class="nav navbar-nav" ng-show="show_user">
+                            <li><a href="#/channels"><i class="fa fa-slack fa-lg"></i> {{'CHANNELS'|translate}}</a></li>
+                            <li><a href="#/contact"><i class="fa fa-users fa-lg"></i> {{'CONTACTS'|translate}}</a></li>
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="" id="themes" ng-if="stackNotifyJoins.length + stackNotifyChs.length"><i class="fa fa-bell fa-lg"></i>{{stackNotifyJoins.length + stackNotifyChs.length}}<span class="caret"></span></a>
+                                <ul class="dropdown-menu" aria-labelledby="themes" >
+                                    <li ng-if="stackNotifyChs.length">&nbsp;&nbsp;Yours</li>
+                                    <li ng-repeat="notify in stackNotifyChs">
+                                        <a href="#/post/{{notify.owner}}/{{notify.idCanal}}/{{notify.idPost}}" ng-click="onClickNotifyChs($index)"> New post in {{notify.chName}} by {{notify.sender}}</a>
+                                    </li>
+                                    <li class="divider" ng-if="stackNotifyChs.length"></li>
+                                    <li ng-if="stackNotifyJoins.length">&nbsp;&nbsp;Joins</li>
+                                    <li ng-repeat="notify in stackNotifyJoins">
+                                        <a href="#/post/{{notify.owner}}/{{notify.idCanal}}/{{notify.idPost}}" ng-click="onClickNotifyJoins($index)"> New post in {{notify.owner}}>{{notify.chName}} by {{notify.sender}}</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#/test" id="themes">{{userName}} <span class="caret"></span></a>
+                                <ul class="dropdown-menu" aria-labelledby="themes">
+                                    <li><a href="#/{{userName}}">{{'PROFILE'|translate}}</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#/update">{{'UPDATE_INFO'|translate}}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav" ng-show="!show_user">
+                            <li><a href="register.html">Sign in</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav" ng-show="show_user">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="" id="themes"><i class="fa fa-globe fa-lg"></i> {{currentLang|langFilter}} <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" aria-labelledby="themes">
+                                        <li><a href="" ng-click="changeLanguage('en')" ng-init="idioma = 'en'" >{{'ENGLISH'|translate}}</a></li>
+                                        <li><a href="" ng-click="changeLanguage('es')" ng-init="idioma = 'es'">{{'SPANISH'|translate}}</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <li><a href="" ng-click="clickSalir()"><i class="fa fa-sign-out fa-lg"></i> {{'SING_OUT'|translate}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <dir-qckpost texto="texto1" ng-show="false"></dir-qckpost>
+                <div class="page-header" id="banner">
+                </div>
+                <div class="bs-docs-section clearfix">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="content" ng-view >
+
+                                Role&Join wait please...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="js/jquery.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/angular/angular.min.js"></script>
+            <script src="js/angular/angular-animate.min.js"></script>
+            <script src="js/angular/angular-route.min.js"></script>
+            <script src="js/angular/angular-cookies.min.js"></script>
+            <script src="js/angular/angular-resource.min.js"></script>
+            <script src="js/angular/angular-sanitize.min.js"></script>
+            <script src="js/angular/angular-file-upload.js"></script>
+            <script src="js/angular/angular-translate.min.js"></script>
+            <script src="scripts/app.js"></script>
+            <script src="scripts/controllers.js"></script>
+            <script src="scripts/services.js"></script>
+            <script src="scripts/directives.js"></script>
+            <script src="scripts/filters.js"></script>
+            <script src="js/angular/modules/angular-md5.min.js"></script>
+            <script src="js/angular/modules/angular-base64.min.js"></script>
+            <script src="js/ui-bootstrap-tpls-0.11.0.min.js"></script>
+        </div>
+    </body>
 </html>

@@ -1,0 +1,105 @@
+<div class="container" ng-controller="updateUserControl">
+    <div class="bs-docs-section">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <ul class="breadcrumb">
+                    <li class="active"><strong>{{'UPDATE_USER_PROFILE'|translate}}</strong></li>
+                </ul>
+            </div>
+
+            <!--form update basic information-->
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="well bs-component">
+                    <form class="form-horizontal" name="registerForm" id="contactForm" novalidate>
+                        <fieldset>
+                            <legend>{{'UPDATE_YOUR_INFORMATION'|translate}}</legend>
+
+                            <div class="form-group">
+                                <label for="email" class="col-lg-2 control-label">{{'EMAIL'|translate}}</label>
+                                <div class="col-lg-10">
+                                    <input name="txtEmail" type="email" class="form-control" placeholder="{{'EMAIL'|translate}}" id="email" required data-validation-required-message="Please enter your email address." ng-model="userInfo.email" />
+                                    <span class="text-danger" ng-show="registerForm.txtEmail.$error.email"><strong> {{'INAVALID_EMAIL'|translate}}</strong></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-lg-2 control-label">{{'NAME'|translate}}</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" placeholder="{{'NAME'|translate}}" id="name" required data-validation-required-message="Please enter your name." ng-model="userInfo.nombre" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputLastName" class="col-lg-2 control-label">{{'LAST_NAME'|translate}}</label>
+                                <div class="col-lg-10">
+                                    <input id="inputLastName" type="text" class="form-control" placeholder="{{'LAST_NAME'|translate}}" required data-validation-required-message="Please enter your last name." ng-model="userInfo.apellido">
+                                </div>
+                            </div>
+
+                            <div class="alert alert-dismissible alert-{{alertStyle}}" ng-if="showAlertInfo">
+                                <button type="button" class="close" data-dismiss="alert" ng-click="onClickBtnCloseAlert()">×</button>
+                                <!--<h4>{{'UPDATE_YOUR_INFORMATION'|translate}}</h4>-->
+                                <p>{{alertMsg|translate}}</p>
+                            </div>
+
+<!--                            <div class="form-group" ng-show="showAlert">
+                                <alert type="danger" close="closeAlert()">{{alertMsg|translate}}</alert>
+                            </div>-->
+
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="reset" class="btn btn-default">{{'CANCEL'|translate}}</button>
+                                    <button type="update" class="btn btn-primary" ng-click="onClickUpdateInfo()"  ng-disabled="registerForm.$invalid" >{{'SEND'|translate}}</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+            <!--form update password-->
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="well bs-component">
+                    <form class="form-horizontal" name="pwdForm" id="contactForm" novalidate>
+                        <fieldset>
+                            <legend>{{'UPDATE_YOUR_PASSWORD'|translate}}</legend>                       
+
+                            <div class="form-group">
+                                <label for="password" class="col-lg-2 control-label">{{'PASSWORD'|translate}}</label>
+                                <div class="col-lg-10">
+                                    <input  required ng-model="userInfo.pwd" type="password" class="form-control" placeholder="{{'PASSWORD'|translate}}" id="password"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="newpwd" class="col-lg-2 control-label">{{'NEW_PASSWORD'|translate}}</label>
+                                <div class="col-lg-10">
+                                    <input  required ng-model="userInfo.newPwd" type="password" class="form-control" placeholder="{{'NEW_PASSWORD'|translate}}" id="newpwd"/>
+                                </div>
+                            </div>
+                            
+                            <div class="alert alert-dismissible alert-{{alertStyle}}" ng-if="showAlertPwd">
+                                <button type="button" class="close" data-dismiss="alert" ng-click="onClickBtnCloseAlert()">×</button>
+                                <!--<h4>{{'UPDATE_YOUR_INFORMATION'|translate}}</h4>-->
+                                <p>{{alertMsg|translate}}</p>
+                            </div>
+
+<!--                            <div class="form-group" ng-show="showAlertPwd">
+                                <alert type="danger" close="closeAlert()">{{alertMsg|translate}}</alert>
+                            </div>-->
+
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="reset" class="btn btn-default">{{'CANCEL'|translate}}</button>
+                                    <!--ng-disabled="pwdForm.$invalid--> 
+                                    <button type="update" class="btn btn-primary" ng-click="onClickUpdatePwd()"  ng-disabled="pwdForm.$invalid" >{{'SEND'|translate}}</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

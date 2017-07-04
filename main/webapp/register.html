@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Login - Role&Join</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="stylesheet" href="css/bootswatch.com.united/bootstrap.css" media="screen">
+        <link rel="stylesheet" href="css/bootswatch.com.united/bootstrap.min.css">
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/bootstrapcdn.com.font-awesome.4.3.0.css/font-awesome-4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="rolejoin_icon_fonts/rolejoin_style.css">
+        <link rel="shortcut icon" href="img/role_and_join_icon.png">
+    </head>
+    <body ng-app="helloApp" ng-controller="crearUsuarioControl">
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+
+                    <a href="about.html" class="navbar-brand" style="text-align: center"><i class="fa icon-role_and_join_icon fa-lg"></i> Role And Join </a>
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-main">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <span class="icon-next"></span>
+
+                        </li>
+                        <li>
+                            <a HREF="{{url}}login.html"><i class="fa fa-sign-in fa-lg"></i><strong> {{'LOGIN'|translate}}</strong></a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="" id="themes"><i class="fa fa-globe fa-lg"></i> {{currentLang|langFilter}} <span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="themes">
+                                <li><a href="" ng-click="changeLanguage('en')">{{'ENGLISH'|translate}}</a></li>
+                                <li><a href="" ng-click="changeLanguage('es')">{{'SPANISH'|translate}}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="page-header" id="banner">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-6">
+                        <h1>{{ 'SIGN_IN' | translate }}</h1>
+                        <p class="lead">{{ 'SIGN_IN_INFO' | translate }}</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Login Form
+            ================================================== -->
+            <div class="bs-docs-section">
+                <!--                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="page-header">
+                                            <h1 id="forms">Forms</h1>
+                                        </div>
+                                    </div>
+                                </div>-->
+
+                <div class="row" ng-show="registerOk">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <!--<h2>Welcome to Role & Join. Now you can <a ng-href="login.html">Login</a></h2>-->
+                        <h2>We'll send an email in the coming days, with activation instructions.</h2>
+                        <h2>For now we have the <a ng-href="best.html">best channels</a> for you.</h2>
+                    </div>
+                </div>
+
+                <div class="row" ng-show="!registerOk">
+
+                    <div class="col-lg-6 ">
+                        <div class="well bs-component">
+                            <form class="form-horizontal" name="registerForm" id="contactForm" novalidate>
+                                <fieldset>
+                                    <legend>{{'REGISTER_HERE'|translate}}</legend>
+                                    <div class="form-group">
+                                        <label for="inputUsername" class="col-lg-2 control-label">{{'USER_NAME'|translate}}</label>
+                                        <div class="col-lg-10">
+                                            <input id="inputUsername" type="text"  class="form-control" placeholder="Name"  required data-validation-required-message="Please enter your name."  ng-model="usuario.userName" >
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="col-lg-2 control-label">{{'EMAIL'|translate}}</label>
+                                        <div class="col-lg-10">
+                                            <input name="txtEmail" type="email" class="form-control" placeholder="{{'EMAIL'|translate}}" id="email" required data-validation-required-message="Please enter your email address." ng-model="usuario.email" />
+                                            <span class="text-danger" ng-show="registerForm.txtEmail.$error.email"><strong> {{'INAVALID_EMAIL'|translate}}</strong></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name" class="col-lg-2 control-label">{{'NAME'|translate}}</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" placeholder="{{'NAME'|translate}}" id="name" required data-validation-required-message="Please enter your name." ng-model="usuario.nombre" >
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputLastName" class="col-lg-2 control-label">{{'LAST_NAME'|translate}}</label>
+                                        <div class="col-lg-10">
+                                            <input id="inputLastName" type="text" class="form-control" placeholder="{{'LAST_NAME'|translate}}" required data-validation-required-message="Please enter your last name." ng-model="usuario.apellido">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="{{'PASSWORD'|translate}}" class="col-lg-2 control-label">PassWord</label>
+                                        <div class="col-lg-10">
+                                            <input  required ng-model="usuario.pwd" type="password" class="form-control" placeholder="{{'PASSWORD'|translate}}" id="password"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" ng-show="showAlert">
+                                        <alert type="danger" close="closeAlert()">{{alertMsg|translate}}</alert>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-10 col-lg-offset-2">
+                                            <button type="reset" class="btn btn-default">{{'CANCEL'|translate}}</button>
+                                            <button type="submit" class="btn btn-primary" ng-click="clickNewUser()"  ng-disabled="registerForm.$invalid" >{{'SEND'|translate}}</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="/img/bg2.jpg" class="img-responsive">
+                    </div>
+                </div>
+            </div>
+
+            <footer >
+                <div class="row">
+                    <div class="col-lg-12">
+                        <hr/>
+                        <p>Made by <a href="https://twitter.com/swlozano" rel="nofollow">Alejandro Lozano M.</a> Contact him at <a href="mailto:swlozano@gmail.com">swlozano@gmail.com</a>.</p>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/angular/angular.min.js"></script>
+        <script src="js/angular/angular-animate.min.js"></script>
+        <script src="js/angular/angular-route.min.js"></script>
+        <script src="js/angular/angular-cookies.min.js"></script>
+        <script src="js/angular/angular-resource.min.js"></script>
+        <script src="js/angular/angular-sanitize.min.js"></script>
+        <script src="js/angular/angular-file-upload.js"></script>
+        <script src="js/angular/angular-translate.min.js"></script>
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers.js"></script>
+        <script src="scripts/services.js"></script>
+        <script src="scripts/directives.js"></script>
+        <script src="scripts/filters.js"></script>
+        <script src="js/angular/modules/angular-md5.min.js"></script>
+        <script src="js/angular/modules/angular-base64.min.js"></script>
+        <script src="js/ui-bootstrap-tpls-0.11.0.min.js"></script>
+    </body>
+</html>

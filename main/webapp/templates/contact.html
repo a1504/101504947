@@ -1,0 +1,73 @@
+<div class="row-fluid">
+
+    <div class="col-lg-12">
+        <ul class="breadcrumb">
+            <li class="active"><strong>{{'CONTACTS'|translate}}</strong></li>
+        </ul>
+    </div>
+
+    <div class="col-lg-8 col-lg-offset-2" >
+
+        <form class="form-horizontal" name="registerForm" id="contactForm" novalidate>
+            <fieldset>
+                <div class="form-group" align="center">
+                    <label for="email" class="col-lg-2 control-label">{{'USER_NAME'|translate}}</label>
+                    <div class="col-lg-10">
+                        <input type="text"  class="form-control" placeholder="{{'USER_NAME_SEARCH'|translate}}"  ng-model="contact.contact" ng-click="showMsgNoResults = false">
+                        <span class="text-danger" ng-show="registerForm.txtEmail.$error.email"><strong> {{'INAVALID_EMAIL'|translate}}</strong></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="reset" class="btn btn-default" ng-click="showMsgNoResults = false">{{'CANCEL'|translate}}</button>
+                        <button type="submit" class="btn btn-primary" ng-click="clickSearch()">{{'SEARCH'|translate}}</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+        <div ng-hide="false" align="center">
+            <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()" ng-show="posts.length"></pagination>
+        </div>
+    </div>
+
+    <div class="col-lg-12"  ng-if="showMsgNoResults">
+        <p class="lead">{{'NO_RESULTS'|translate}}</p>
+    </div>
+
+    <div class="col-lg-12">
+        <hr class="star-primary">
+    </div>
+
+    <div class="col-lg-12"  ng-if="searchResult.contact != undefined">
+
+        <div class="col-lg-6" align="center">
+            <p class="lead">
+                <A ng-href="#/{{searchResult.contact}}">{{searchResult.contact}}</A>
+            </p>
+        </div>
+        <div class="col-lg-6" align="center" ng-if="searchResult.id == 0">
+            <button type="submit" class="btn btn-success" ng-click="clickAdd()">{{'ADD'|translate}}</button>
+        </div>
+
+        <div class="col-lg-12">
+            <hr class="star-primary">
+        </div>
+
+    </div>
+
+    <div ng-repeat="contact in contacts| filter:contact.contact" class="col-lg-12">
+        <div class="col-lg-6" align="center">
+            <p class="lead">
+                <A ng-href="#/{{contact.contact}}">{{contact.contact}}</A>
+            </p>
+        </div>
+        <div class="col-lg-6" align="center">
+            <button  ng-click="clickDelete($index)" class="btn btn-danger">{{'DELETE'|translate}}</button>
+        </div>
+        <div class="col-lg-12">
+            <hr class="star-primary">
+        </div>
+    </div>
+</div>

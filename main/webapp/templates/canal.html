@@ -1,0 +1,176 @@
+<div class="row-fluid">
+
+    <div class="col-lg-12">
+        <ul class="breadcrumb">
+            <li class="active"><strong>{{'POSTS'|translate}}</strong></li>
+        </ul>
+    </div>
+
+    <div class="row-fluid" >
+        <div class="col-lg-12" >
+            <A ng-href="#/{{userName}}" class="link-size" >{{userName}}</A> <strong>></strong>
+            <a ng-href="#/{{userName}}/{{idCanal}}" class="link-size"> {{canal.nombre}}</a>
+        </div>
+        <div class="div-space"></div>
+        <div class="col-lg-12" >
+            <a href="" class="btn btn-primary btn-xs" ng-click="clickMakePost()">{{'MAKE_POST'|translate}}</a>
+            <a href="" class="btn btn-info btn-xs" >{{'CHANNEL_DATAILS'|translate}}</a>
+        </div>
+
+    </div>
+
+    <div class="col-lg-12" ng-show="showQckPost">
+        <dir-qckpost texto="texto1"></dir-qckpost>
+    </div>
+
+    <div class="col-lg-12"><hr/></div>
+
+    <div class="col-lg-12" align="center" ng-hide="true">
+        <div class="col-lg-12">
+            <img src="../img/face.png" class="img-thumbnail"/>
+        </div>
+        <div class="col-lg-12">
+            <h5><A ng-href="#/{{userName}}">{{userName}}</A></h5>
+            <h4><a ng-href="#/{{userName}}/{{idCanal}}"> {{canal.nombre}}</a></h4>
+            {{canal.descrip}}
+            <hr/>
+        </div>
+    </div>
+
+    <div class="col-lg-12" ng-hide="true">
+
+        <div class="col-lg-3">
+            <div align="center">
+                <img src="../img/face.png" class="img-thumbnail"/>
+            </div>
+            <div align="center">
+                <A ng-href="#/{{userName}}" >{{userName}}</A>
+            </div>
+            <hr/>
+        </div>
+
+        <div class="col-lg-9">
+            <div align="center">
+                <h1><a ng-href="#/{{userName}}/{{idCanal}}"> {{canal.nombre}}</A></h1>
+                <p>{{canal.descrip}}</p>
+            </div>
+            <div class="col-lg-12">
+                <hr/>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="list-group">
+            <a href="" class="list-group-item" ng-click="getPots(false)"> 
+                <!--<span class="badge">+99</span>-->
+                {{'WITH_ALL'|translate}}
+            </a>
+            <a href="" class="list-group-item" ng-click="getPots(true)"> 
+                <!--<span class="badge">+99</span>-->
+                {{'WITH_YOU_AND_OTHERS'|translate}}
+            </a>
+        </div>        
+        <div class="list-group" ng-hide="true">
+            <a href="" class="list-group-item" ng-repeat="data in posts" ng-click="onClickPost($index)"> 
+                <img src="../img/face-24.png" class="img-thumbnail"/>
+                <!--<span class="badge">+99</span>-->
+                {{posts[$index].remitente}}:
+                "{{ data.msg | limitTo:20 }}..."
+            </a>
+            <ul class="pager" ng-if="bigTotalItems > 10">
+                <li class="previous" ng-click="newPage(false)"><a href="">← Prev</a></li>
+                <li><a href="">{{bigCurrentPage}}/{{numPages}}</a></li>
+                <li class="next" ng-click="newPage(true)"><a href="">Next →</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <div >
+            <!--<div   ng-show="showYours" >-->
+            <div>
+                <div class="row-fluid">
+                    <div class="col-lg-12 panel panel-default" ng-repeat="data in posts">
+                        <div class="panel-body"  >
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row-fluid">
+                                        <!--<A name="item1" ng-href="#/{{userName}}/{{idCanal}}">{{canal.nombre}}</A>--> 
+                                        <!--Post by--> 
+                                        <A name="item1" ng-href="#/{{data.remitente}}">{{data.remitente}}</A><br/>
+                                    </div>
+                                    <div class="col-lg-12" ng-init="value = true">
+                                        <br/>
+                                        <blockquote class="text-justify"  ng-show="data.msg.length" ng-bind-html="data.msg|limitFilter:value"></blockquote>
+                                        <div ng-show="data.msg.length > 120">
+                                            <a href="" ng-show="value" ng-click="value = false">{{'VIEW_MORE'|translate}}</a>
+                                            <a href="" ng-show="!value" ng-click="value = true">{{'VIEW_LESS'|translate}}</a>
+                                            <br/>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="col-lg-12" ng-show="data.blobs.length" ng-hide="true"> 
+                                        <div class="row">
+                                            <div class="col-md-6" >
+                                                <img src="{{urlImages}}{{data.blobs[0]}}" class="img-responsive" ng-if="isImage(ds_index)"/>
+                                                <a href="{{urlFiles}}{{data.blobs[0]}}" target="_blank" ng-if="!isImage(ds_index)">
+                                                    <img  src="img/file.png" class="img-responsive" />
+                                                    {{data.nameBlobs[0]}}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12"> 
+
+                                        <div class="row">
+                                            <div class="col-md-6" >
+                                                <A class="btn btn-default btn-xs" ng-click="go($index)" ng-href="#post/{{userName}}/{{canal.idCanal}}/{{data.idPost}}">{{'VIEW_POST'|translate}}
+                                                </A>
+                                                <a class="ng-scope" href="" ng-click="clickDeletePost(data.idPost)" ng-if="data.canDelete" style="color: #999999"><span class="fa fa-trash-o  fa-lg"></span></a>
+                                                <!--<input type="button" value="Delete Post" ng-click="clickDeletePost(data.idPost)" class="pull-left" ng-if="data.canDelete"/>-->
+                                                <i class="fa fa-pencil-square-o fa-lg" style="color: #999999" ng-if="data.msg.length">{{data.msg.length}}</i>
+                                                <i class="fa fa-picture-o fa-lg" style="color: #999999" ng-if="data.nameBlobs.length"><strong> + </strong></i>
+                                                <i class="fa fa-files-o fa-lg" style="color: #999999" ng-if="data.nameBlobs.length"> {{data.nameBlobs.length}}</i>   
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+
+
+                    <div class="col-lg-12 panel panel-default" ng-if="!posts.length && !showWarningMsg">
+                        {{'LOADING'|translate}}
+                    </div>
+
+                    <div class="col-lg-12 panel panel-default" ng-if="showWarningMsg">
+                        <div class="panel-body"  >
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row-fluid">
+                                        <i class="fa fa-exclamation-triangle fa-2x" style="color: #ffcc00"></i>
+
+                                        <h3 class="text-inline-block" ng-show="!hasWith">&nbsp;{{'NO_POSTS'|msgFilter}} <a href=""> {{canal.nombre}}</a></h3>
+                                        <h3 class="text-inline-block" ng-show="hasWith">&nbsp;{{'NO_MSG_SECRETLY'|msgFilter}}</h3>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div ng-hide="false" align="center">
+            <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()" ng-show="posts.length"></pagination>
+        </div>
+    </div>
+</div>

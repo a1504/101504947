@@ -1,0 +1,123 @@
+<div class="row-fluid">
+
+    <div class="col-lg-12">
+        <ul class="breadcrumb">
+            <li class="active"><strong>{{'VIEW_POST'|translate}}</strong></li>
+        </ul>
+    </div>
+
+    <div class="row-fluid" >
+        <div class="col-lg-12" >
+            <A ng-href="#/{{channel.ownerUser}}/{{channel.idCanal}}" class="link-size">{{channel.nombre}}</A>
+        </div>
+        <div class="div-space"></div>
+        <div class="col-lg-12" >
+            <a href="" class="btn btn-info btn-xs">{{'POST_DETAILS'|translate}}</a>
+        </div>
+    </div>
+
+    <div class="col-lg-12"><hr/></div>
+
+    <div class="col-lg-12" align="center" ng-hide="true">
+        <div class="col-lg-12">
+            <img src="../img/face.png" class="img-thumbnail"/>
+        </div>
+        <div class="col-lg-12">
+            <h5> <A ng-href="#/{{channel.ownerUser}}" >{{channel.ownerUser}}</A></h5>
+            <h4><strong><A ng-href="#/{{channel.ownerUser}}/{{channel.idCanal}}">{{channel.nombre}}</A></strong></h4>
+            {{channel.descrip}}
+            <hr/>
+        </div>
+    </div>
+
+    <div class="row-fluid" ng-hide="true">
+        <div class="col-lg-2">
+            <div align="center">
+                <img src="../img/face.png" class="img-thumbnail"/>
+            </div>
+            <div align="center">
+                <A ng-href="#/{{channel.ownerUser}}" >{{channel.ownerUser}}</A>
+            </div>
+        </div>
+
+        <div class="col-lg-8" align="center">
+            <h1> <A ng-href="#/{{channel.ownerUser}}/{{channel.idCanal}}">{{channel.nombre}}</A></h1>
+            <h4> {{channel.descrip}}</h4>
+            <i class="fa fa-pencil-square-o fa-lg" style="color: #DD4814"></i>
+            <i class="fa fa-picture-o fa-lg" style="color: #DD4814"></i>
+            <i class="fa fa-files-o fa-lg" style="color: #DD4814"></i>                      
+        </div>
+
+        <div class="col-lg-12">
+            <hr/>
+        </div>
+
+    </div>
+
+    <div class="col-lg-12">
+        <div class="col-lg-2">
+            <div align="center">
+                <img src="../img/face.png" class="img-thumbnail"/>
+            </div>
+            <div align="center">
+                <A ng-href="#/{{dataSet.remitente}}" >{{dataSet.remitente}}</A>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <A name="item1" ng-href="#/{{dataSet.remitente}}" ng-hide="true">{{dataSet.remitente}}</A>
+            <p><span popover="{{dataSet.datePost| date:'mediumTime'}}" popover-trigger="mouseenter"> {{dataSet.datePost| date:'MMM d, y'}}</span></p>
+            <p class="text-justify"  ng-show="dataSet.msg.length" ng-bind-html="dataSet.msg"
+               style="font-size: 17.5px"></p>
+        </div>
+    </div>
+
+    <div class="col-lg-12" ng-if="dataSet.blobs.length">
+        <br/>
+        <div class="blob_container" align="center">
+            <div class="blob_back"  ng-click="changeBlob(false)"></div>
+            <img src="{{urlImages}}{{dataSet.blobs[index_blob]}}" class="img-responsive"  ng-if="isImage(index_blob)" />
+            <a href="{{urlFiles}}{{dataSet.blobs[index_blob]}}" target="_blank" ng-if="!isImage(index_blob)" >
+                <img  src="img/file.png" class="img-responsive" />
+                {{dataSet.nameBlobs[index_blob]}}
+            </a>
+            <div class="blob_next" ng-click="changeBlob(true)" ></div>
+        </div>
+    </div>
+
+    <div class="col-lg-8 col-lg-offset-2">
+        <br/>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-comment-o  fa-lg" style="color: #DD4814"></i></span>
+            <input class="form-control" type="text" name="txt_comentario" 
+                   ng-minlength="1" ng-maxlength="1000" ng-model="comment" placeholder="{{'MAKE_COMMENT'|translate}}"/>
+
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="clickComentario($index)">{{'COMMENT'|translate}}</button>
+            </span>
+        </div>
+        <br/>
+    </div>
+
+    <div class="col-lg-8 col-lg-offset-2" ng-if="comentarios.length">
+        <h3>Comments</h3>
+        <div class="row-fluid" ng-repeat="comentario in comentarios" >
+
+            <div class="row-fluid">
+                <div class="col-lg-6">
+                    <h5 class="text-left"><a href="#/comentario.remitente">{{comentario.remitente}}</a></h5>
+                </div>
+                <div class="col-lg-6">
+                    <h5 class="text-right"><a href="" ng-click="delete(comentario.id)" ng-if="comentario.canDelete" style="color: #999999"><span class="fa fa-trash-o  fa-lg" ></span></a></h5>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <p class="text-msg text-justify" ng-bind-html="comentario.comentario" ></p>		
+            </div> 
+
+        </div>
+    </div>
+    <div class="col-lg-8 col-lg-offset-2" align="center">
+        <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
+    </div>
+</div>

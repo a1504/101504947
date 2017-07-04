@@ -1,0 +1,72 @@
+<div class="container" ng-controller="editCanalontrol">
+    <div class="bs-docs-section">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <ul class="breadcrumb">
+                    <li class="active"><strong>{{'UPDATE_CHANNEL'|translate}}</strong></li>
+                </ul>
+            </div>
+
+            <!--form update basic information-->
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="well bs-component">
+                    <form class="form-horizontal" id="contactForm" novalidate>
+                        <fieldset>
+                            <legend>{{'UPDATE_CHANNEL_INFO'|translate}}</legend>
+
+                            <div class="form-group">
+                                <label for="txt_descp" class="col-lg-2 control-label">{{'DESCRIPTION'|translate}}</label>                        
+                                <div class="col-lg-10">
+                                    <input type="text" name="txt_descp" ng-model="canal.descrip"  class="form-control" placeholder="{{'DESCRIPTION'|translate}}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <label for="txt_tipo" class="col-lg-2 control-label">{{'WHO_CAN_POST'|translate}}</label>
+                                <div class="col-lg-10">
+
+                                    <select  name="txt_tipo" ng-model="canal.whoPost" class="form-control">
+                                        <option value="1">{{'JUST_ME'|translate}}</option>
+                                        <option value="2">{{'INVITED'|translate}}</option>
+                                        <option value="3">{{'ANYONE'|translate}}</option>
+                                    </select>
+
+                                    <!--<input type="text" class="form-control" placeholder="{{'NAME'|translate}}" id="name" required data-validation-required-message="Please enter your name." ng-model="userInfo.nombre" >-->
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputLastName" class="col-lg-2 control-label">{{'INVITE'|translate}}</label>
+                                <div class="col-lg-10">
+                                    <textarea ng-model="canal.invitados" class="form-control"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-dismissible alert-success" ng-show="showAlert1">
+                                <button type="button" class="close" data-dismiss="alert" ng-click="onClickBtnCloseAlert()">×</button>
+                                <!--<h4>{{'UPDATE_YOUR_INFORMATION'|translate}}</h4>-->
+                                <p>{{'USER_INFO_UPDATE'|translate}}</p>
+                            </div>
+
+                            <div class="alert alert-dismissible alert-success" ng-show="showAlert2">
+                                <button type="button" class="close" data-dismiss="alert" ng-click="onClickBtnCloseAlert()">×</button>
+                                <!--<h4>{{'UPDATE_YOUR_INFORMATION'|translate}}</h4>-->
+                                <p>{{'USER_INFO_NOT_UPDATE'|translate}}</p>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="reset" class="btn btn-default">{{'CANCEL'|translate}}</button>
+                                    <button type="submit" class="btn btn-primary" ng-click="clickEditCanal()" ng-disabled="contactForm.$invalid">{{'SEND'|translate}}</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

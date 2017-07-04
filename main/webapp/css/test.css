@@ -1,0 +1,45 @@
+#myDiv 
+{
+    height:410px;
+    width:315px;
+}
+#myDiv img
+{
+    max-width:100%; 
+    max-height:100%;
+    margin:auto;
+    display:block;
+}
+
+.blob_container {
+    border: 0px solid #DDDDDD;
+    width: 100%;
+    height: auto;
+    position:relative;
+}
+.blob_back {
+    float: right;
+    position: absolute;
+    background: url(../img/arrow_back.png)  no-repeat center center transparent;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 40%;
+    opacity: 0;
+}
+.blob_back:hover{
+     opacity: .6;
+}
+.blob_next {
+    position: absolute;
+    left: 60%;
+    top: 0px;
+    height: 100%;
+    width: 40%;
+    opacity: 0;
+    background: url(../img/arrow_next.png)  no-repeat center center transparent;
+}
+
+.blob_next:hover{
+     opacity: .6;
+}

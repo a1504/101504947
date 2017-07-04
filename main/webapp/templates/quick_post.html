@@ -1,0 +1,115 @@
+<!--<div class="page-header" id="banner" >
+    <br/><br/>-->
+<div class="row">
+    <div class="container" ng-controller="quickPostController">
+      
+        <div class="col-lg-12" align="center">
+            <br/>
+            <a  href="" ng-click="showElementForm(0)">
+                <span class="fa fa-slack  fa-2x" style="color: #999999"></span>
+            </a>
+            <a  href="" ng-click="showElementForm(1)">
+                <span class="fa fa-pencil-square-o  fa-2x" style="color: #999999"></span>
+            </a>
+            <a  href="" ng-click="showElementForm(2)">
+                <span class="fa fa-cloud-upload  fa-2x" style="color: #999999"></span>
+            </a>
+            <a  href="" ng-click="showElementForm(3)">
+                <span class="fa fa-users fa-2x" style="color: #999999"></span>
+            </a>
+        </div>
+
+        <div class="col-lg-12" >
+            <br/>
+            <div class="col-lg-6 col-lg-offset-3" ng-show="showElementFrm[0]">
+                <div class="col-lg-6" >
+                    <label>{{'USER_NAME'|translate}}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user  fa-lg" style="color: #DD4814"></i></span>
+                        <input class="form-control" type="text" name="txt_comentario" 
+                               ng-minlength="1" ng-maxlength="1000" ng-model="postData.owner" placeholder="Owner Channel"/>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <label>CHANNELS</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-slack  fa-lg" style="color: #DD4814"></i></span>
+                        <input type="text"  class="form-control" ng-model="postData.channel" placeholder="{{'EG'|translate}}. @me#hello"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12" >
+
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="col-lg-12" ng-show="showElementFrm[1]">
+                    <label>{{'NOTE'|translate}}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-pencil-square-o fa-lg" style="color: #DD4814"></i></span>
+                        <textarea ng-model="postData.msg"
+                                  ng-minlength="1" ng-maxlength="2000" rows="1" class="form-control" placeholder="{{'MESSAGE'|translate}}" id="message" >
+                        </textarea>
+                    </div>
+                </div>
+
+                <div class="col-lg-12" ng-show="showElementFrm[2]">
+                    <label>{{'UPLOAD'|translate}}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-cloud-upload fa-lg" style="color: #DD4814"></i></span>
+                        <input type="file" nv-file-select="" uploader="uploader" multiple  class="form-control"/>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-12" ng-show="showProgress" ng-show="showElementFrm[2]">
+                    <progressbar animate="true" value="dynamic" type="success" >
+                        <b>{{dynamic}}%</b>
+                    </progressbar> 
+                </div>
+
+                <div class="col-lg-12" ng-show="showElementFrm[3]">
+                    <label>{{'ONLY_WITH'|translate}}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-users fa-lg" style="color: #DD4814"></i></span>
+                        <textarea ng-model="postData.with"
+                                  ng-minlength="1" ng-maxlength="1000" rows="1" class="form-control" placeholder="{{'SHARED_ONLY_WITH'|translate}}. Eg: @anyone" id="message" ></textarea>
+                    </div>
+                </div>
+
+                <div class="col-lg-12" ng-show="showElementFrm[0]||showElementFrm[1]||showElementFrm[2]||showElementFrm[3]">
+                    <br/>
+                    <div class="input-group">
+                        <input type="button" value="{{'POST'|translate}}" ng-click="clickPost()" ng-disabled="enableBtnPost()" class="btn btn-default pull-left"/>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-12" ng-show="showElementFrm[2]" align="center">
+                <br/>
+                <div ng-repeat="item in uploader.queue" align="center" class="col-lg-2 thumbnail">
+                    <div ng-if="controller.isImage(item._file)" >
+                        <div ng-thumb="{ file: item._file, height: 100, width: 100 }" ></div>
+                        <div class="col-lg-12">{{ item.file.name | limitTo:20}}</div>
+                        <div class="col-lg-12">
+                            <button ng-click="item.cancel()" ng-disabled="!item.isUploading">{{'CANCEL'|translate}}
+                            <button ng-click="item.remove()">Remove</button>
+                        </div>
+                    </div>
+                    <div ng-if="!controller.isImage(item._file)" >
+                        <img src="../img/file.png" style="height: 105px; width: 100px">
+                        <div class="col-lg-12">{{ item.file.name | limitTo:20}}</div>
+                        <div class="col-lg-12">
+                            <button ng-click="item.cancel()" ng-disabled="!item.isUploading">{{'CANCEL'|translate}}
+                            <button ng-click="item.remove()">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--</div>-->

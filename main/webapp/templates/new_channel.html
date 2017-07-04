@@ -1,0 +1,87 @@
+<div class="row-fluid">
+
+    <div class="col-lg-12">
+        <ul class="breadcrumb">
+            <li class="active"><strong>New Channel</strong></li>
+        </ul>
+    </div>
+
+    <div class="col-lg-3" ng-show="false">
+        <div class="list-group">
+            <a href="" class="list-group-item" ng-click="clickTabYours()"> 
+                <span class="badge">+99</span>
+                Yours
+            </a>
+            <a href="" class="list-group-item" ng-click="clickTabJoins()"> 
+                <span class="badge">+99</span>
+                Joins
+            </a>
+            <a href="" class="list-group-item" ng-click="clickInvs()"> 
+                <span class="badge">+99</span>
+                {{'INVITATIONS'|translate}}
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-6 col-lg-offset-3" >
+        <form name="newChannelForm" novalidate>
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    <label>{{'CHANNEL_NAME'|translate}}</label>
+                    <input type="text"  class="form-control" placeholder="Channel Name" required ng-model="canal.nombre">
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
+
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    <label>{{'DESCRIPTION'|translate}}</label>
+                    <input type="text"  class="form-control" placeholder="{{'DESCRIPTION'|translate}}" ng-model="canal.descrip">
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
+
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    <label>{{'PUBLIC'|translate}}</label>
+                    <input type="checkbox" name="chk_public"  class="form-control" ng-model="canal.public">
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
+
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    <label>{{'WHO_CAN_POST'|translate}}</label>
+                    <select  name="txt_tipo" ng-model="canal.whoPost" class="form-control">
+                        <option value="1">{{'JUST_ME'|translate}}</option>
+                        <option value="2">{{'INVITED'|translate}}</option>
+                        <option value="3">{{'ANYONE'|translate}}</option>
+                    </select>
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
+
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    <label>{{'INVITE'|translate}}</label>
+                    <textarea ng-model="canal.invitados" rows="5" class="form-control" placeholder="{{'EG'|translate}}: @anyone, anyemail@anyhost.com" id="message" ></textarea>
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
+
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls" ng-show="alertShow[0] || alertShow[1] || alertShow[2]">
+                    <alert type="success" ng-show="alertShow[0]" close="closeAlert()">{{alertMsg}}</alert>
+                    <alert ng-show="alertShow[1]" close="closeAlert()">{{alertMsg}}</alert>
+                    <alert type="danger" ng-show="alertShow[2]" close="closeAlert()">{{alertMsg}}</alert>            
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    <button type="submit" class="btn btn-success btn-lg" ng-click="clickNewCanal()"
+                            ng-disabled="newChannelForm.$invalid">{{'SEND'|translate}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

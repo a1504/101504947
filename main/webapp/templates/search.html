@@ -1,0 +1,55 @@
+var inicioControl = function($scope, canalFactory, $scope, $routeParams, $log, $location, userCookFactory, $location, $window, $http) {
+  if(userCookFactory.get().token===undefined){
+   $window.location.href = url+"login.html";
+ }
+  
+  $scope.getLocation = function(val) {
+    
+    return $http.get(urlApi + 'contact/search/'+val).then(function(res){
+      var addresses = [];
+      angular.forEach(res.data, function(item){
+        addresses.push(item.contact);
+      });
+      return addresses;
+    });
+  };
+
+}
+<div class="container">
+	<!-- <h1>Instant Post</h1> -->
+	<form novalidate>
+		<div class="row control-group">
+			<div class="form-group col-xs-12 floating-label-form-group controls">
+				<p class="text-left"><label >User:</label></p>
+				<input type="text"  class="form-control" ng-model="ingreso.userName" placeholder="Search User Name" required >
+			</div>
+		</div>
+
+		<div class="row control-group">
+			<div class="form-group col-xs-12 floating-label-form-group controls">
+				<p class="text-left"><label >Channel:</label></p>
+				<input type="text"  class="form-control" ng-model="ingreso.userName" placeholder="Search Channel Name" required>
+			</div>
+		</div>
+
+	</form>
+
+	<script type="text/ng-template" id="customTemplate.html">
+		<a>
+			<img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/{{match.model.flag}}" width="16">
+			<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+		</a>
+	</script>
+
+
+	<div class='container-fluid' >
+
+		<h4>Asynchronous results</h4>
+		<pre>Model: {{asyncSelected | json}}</pre>
+		<input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" class="form-control">
+		<i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+		{{test}}
+	</div>
+
+
+</div>
